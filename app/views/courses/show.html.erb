@@ -1,0 +1,22 @@
+<%= render :partial => @course %>
+<h2>Quizzes</h2>
+<%= @course.quizzes.each do |quiz| %>
+  <div id = "quiz">
+    <p>
+      <strong> Quiz <%= time_ago_in_word(quiz.created_at) %></strong>
+      <br />
+      <%= quiz.content %>
+    </p>
+  </div>
+<% end %>
+
+<%= form_for [@course, Quiz.new] do |f|%>
+  <p>
+    <%= f.label :content, "New Quiz" %>
+    <%= f.text_area :content %>
+  </p>
+
+  <p><%= f.submit "Add Quiz" %></p>
+<% end %>
+<%= link_to 'Edit', edit_course_path(@course) %> 
+<%= link_to 'Back', courses_path %>
